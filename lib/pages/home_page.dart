@@ -1,9 +1,12 @@
 import 'package:bdc_website/modules/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/rive_utils.dart';
 import '../utils/utils.dart';
+
+final Uri _url = Uri.parse('https://www.buymeacoffee.com/bchamberlain');
 
 class HomePageLayout extends StatelessWidget {
   const HomePageLayout({super.key});
@@ -53,8 +56,6 @@ class _HomePageDesktopState extends State<HomePageDesktop>
 
   @override
   void initState() {
-    // TODO: implement initState
-
     Future.delayed(Duration(seconds: 0)).then((value) => setState(() {
           selectedNavigation = true;
         }));
@@ -86,18 +87,51 @@ class _HomePageDesktopState extends State<HomePageDesktop>
           Container(
             width: size.width,
             height: size.height,
-            color: Colors.white,
+            color: Colors.grey[800],
+            child: Stack(
+              children: [
+                Positioned(
+                  left: MediaQuery.of(context).size.width / 4,
+                  top: 25,
+                  child: TextButton(
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.resolveWith<Color?>(
+                        (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.pressed)) {
+                            return Color.fromARGB(255, 97, 24, 110);
+                          }
+                          return Colors.black; // Use the component's default.
+                        },
+                      ),
+                    ),
+                    onPressed: () async {
+                      if (!await launchUrl(_url)) {
+                        throw Exception('Could not launch $_url');
+                      }
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('Buy me a coffee (click here)',
+                          style:
+                              TextStyle(fontSize: 30, color: Colors.green[50])),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
           AnimatedPositioned(
             duration: Duration(milliseconds: 1000),
             curve: Curves.fastOutSlowIn,
-            left: MediaQuery.of(context).size.width - 250,
+            right: isSideMenuClosed ? -250 : 0,
             width: 250,
             height: MediaQuery.of(context).size.height,
             child: MenuDesktop(),
           ),
           Transform.translate(
-            offset: isSideMenuClosed ? Offset(0, 0) : Offset(-250, 0),
+            offset: Offset(animation.value * -250,
+                0), //isSideMenuClosed ? Offset(0, 0) : Offset(-250, 0),
             child: Transform.scale(
               scale: isSideMenuClosed ? 1 : 0.8,
               child: ClipRRect(
@@ -156,15 +190,26 @@ class _HomePageDesktopState extends State<HomePageDesktop>
                                     splashFactory: InkRipple.splashFactory,
                                   ),
                                   onPressed: () {
+                                    if (isSideMenuClosed) {
+                                      _animationController.forward();
+                                    } else {
+                                      _animationController.reverse();
+                                    }
                                     setState(() {
                                       isSideMenuClosed = !isSideMenuClosed;
                                     });
                                   },
-                                  child: const Icon(
-                                    Icons.menu,
-                                    size: 55,
-                                    color: Colors.black,
-                                  ),
+                                  child: isSideMenuClosed
+                                      ? const Icon(
+                                          Icons.menu,
+                                          size: 55,
+                                          color: Colors.black,
+                                        )
+                                      : Icon(
+                                          Icons.arrow_forward_ios,
+                                          size: 55,
+                                          color: Colors.black,
+                                        ),
                                 ),
                               ),
                             ],
