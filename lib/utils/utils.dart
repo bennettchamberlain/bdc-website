@@ -1,0 +1,1 @@
+int MobileBreakpoint = 600;

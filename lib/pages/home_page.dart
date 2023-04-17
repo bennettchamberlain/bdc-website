@@ -1,4 +1,9 @@
+import 'package:bdc_website/modules/side_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:rive/rive.dart';
+
+import '../utils/rive_utils.dart';
+import '../utils/utils.dart';
 
 class HomePageLayout extends StatelessWidget {
   const HomePageLayout({super.key});
@@ -8,7 +13,7 @@ class HomePageLayout extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         Size size = MediaQuery.of(context).size;
-        if (size.width < 600) {
+        if (size.width < MobileBreakpoint) {
           return HomePageMobile();
         } else {
           return HomePageDesktop();
@@ -39,75 +44,143 @@ class HomePageDesktop extends StatefulWidget {
   State<HomePageDesktop> createState() => _HomePageDesktopState();
 }
 
-class _HomePageDesktopState extends State<HomePageDesktop> {
+class _HomePageDesktopState extends State<HomePageDesktop>
+    with SingleTickerProviderStateMixin {
   bool selectedNavigation = false;
+  bool isSideMenuClosed = true;
+  late AnimationController _animationController;
+  late Animation animation;
 
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
+
     Future.delayed(Duration(seconds: 0)).then((value) => setState(() {
           selectedNavigation = true;
         }));
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 200))
+          ..addListener(() {
+            setState(() {});
+          });
+    animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
+        parent: _animationController, curve: Curves.fastOutSlowIn));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 8, color: Colors.black)),
-                    child: AnimatedContainer(
-                      width: selectedNavigation
-                          ? MediaQuery.of(context).size.width - 123
-                          : 0.0,
-                      duration: const Duration(milliseconds: 1600),
-                      curve: Curves.fastOutSlowIn,
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              top: 5.0, bottom: 8, left: 10, right: 10),
-                          child: Text(
-                            "BENNETT CHAMBERLAIN",
-                            style: TextStyle(
-                                fontFamily: "Primetime",
-                                fontWeight: FontWeight.bold,
-                                fontSize: 45),
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
+      extendBody: true,
+      body: Stack(
+        children: [
+          Container(
+            width: size.width,
+            height: size.height,
+            color: Colors.white,
+          ),
+          AnimatedPositioned(
+            duration: Duration(milliseconds: 1000),
+            curve: Curves.fastOutSlowIn,
+            left: MediaQuery.of(context).size.width - 250,
+            width: 250,
+            height: MediaQuery.of(context).size.height,
+            child: MenuDesktop(),
+          ),
+          Transform.translate(
+            offset: isSideMenuClosed ? Offset(0, 0) : Offset(-250, 0),
+            child: Transform.scale(
+              scale: isSideMenuClosed ? 1 : 0.8,
+              child: ClipRRect(
+                child: Container(
+                  color: Colors.white,
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        width: 8, color: Colors.black)),
+                                child: AnimatedContainer(
+                                  width: selectedNavigation
+                                      ? MediaQuery.of(context).size.width - 123
+                                      : 0.0,
+                                  duration: const Duration(milliseconds: 1600),
+                                  curve: Curves.fastOutSlowIn,
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 5.0,
+                                          bottom: 8,
+                                          left: 10,
+                                          right: 10),
+                                      child: Text(
+                                        "BENNETT CHAMBERLAIN",
+                                        style: TextStyle(
+                                            fontFamily: "Primetime",
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 45),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                height: 90,
+                                width: 90,
+                                //padding: EdgeInsets.all(19),
+                                decoration: BoxDecoration(
+                                    border: Border(
+                                        top: BorderSide(
+                                            width: 8, color: Colors.black),
+                                        right: BorderSide(
+                                            width: 8, color: Colors.black),
+                                        bottom: BorderSide(
+                                            width: 8, color: Colors.black))),
+                                child: TextButton(
+                                  style: ButtonStyle(
+                                    splashFactory: InkRipple.splashFactory,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      isSideMenuClosed = !isSideMenuClosed;
+                                    });
+                                  },
+                                  child: const Icon(
+                                    Icons.menu,
+                                    size: 55,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
+                          SizedBox(
+                            height: 1000,
+                          )
+                        ],
                       ),
                     ),
                   ),
-                  Container(
-                    height: 90,
-                    width: 90,
-                    //padding: EdgeInsets.all(19),
-                    decoration: BoxDecoration(
-                        border: Border(
-                            top: BorderSide(width: 8, color: Colors.black),
-                            right: BorderSide(width: 8, color: Colors.black),
-                            bottom: BorderSide(width: 8, color: Colors.black))),
-                    child: IconButton(
-                        padding: EdgeInsets.all(0),
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.menu,
-                          size: 55,
-                        )),
-                  ),
-                ],
+                ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

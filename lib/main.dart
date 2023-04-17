@@ -1,3 +1,4 @@
+import 'package:bdc_website/modules/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:vrouter/vrouter.dart';
 import 'pages/home_page.dart';
@@ -12,12 +13,30 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VRouter(
+      mode: VRouterMode.history,
       debugShowCheckedModeBanner: false,
-      routes: [VWidget(path: '/', widget: const HomePageLayout())],
+      routes: [
+        VWidget(
+          path: '/',
+          widget: const HomePageLayout(),
+        ),
+        VWidget(
+          path: '/about',
+          widget: const MenuPageLayout(),
+        ),
+        VWidget(
+          path: '/portfolio',
+          widget: const MenuPageLayout(),
+        ),
+        VWidget(
+          path: '/contact',
+          widget: const MenuPageLayout(),
+        ),
+      ],
       title: 'BDC - 999',
       theme: ThemeData(
         fontFamily: 'Primetime',
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.grey,
       ),
     );
   }
