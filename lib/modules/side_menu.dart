@@ -2,6 +2,7 @@ import 'package:bdc_website/components/side_menu_tile.dart';
 import 'package:bdc_website/models/animation_model.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
+import 'package:vrouter/vrouter.dart';
 
 import '../utils/rive_utils.dart';
 import '../utils/utils.dart';
@@ -86,6 +87,18 @@ class _MenuDesktopState extends State<MenuDesktop> {
                   setState(() {
                     selectedMenu = menu;
                   });
+                  if (selectedMenu.title == 'Home') {
+                    context.vRouter.to('/');
+                  }
+                  if (selectedMenu.title == 'About') {
+                    context.vRouter.to('/about');
+                  }
+                  if (selectedMenu.title == 'Portfolio') {
+                    context.vRouter.to('/portfolio');
+                  }
+                  if (selectedMenu.title == 'Contact') {
+                    context.vRouter.to('/contact');
+                  }
                 },
                 isActive: selectedMenu == menu,
               ),

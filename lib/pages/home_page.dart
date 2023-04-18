@@ -91,7 +91,7 @@ class _HomePageDesktopState extends State<HomePageDesktop>
             child: Stack(
               children: [
                 Positioned(
-                  left: MediaQuery.of(context).size.width / 4,
+                  right: 310,
                   top: 25,
                   child: TextButton(
                     style: ButtonStyle(
@@ -111,10 +111,10 @@ class _HomePageDesktopState extends State<HomePageDesktop>
                       }
                     },
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(15.0),
                       child: Text('Buy me a coffee (click here)',
-                          style:
-                              TextStyle(fontSize: 30, color: Colors.green[50])),
+                          style: TextStyle(
+                              fontSize: 20, color: Colors.green[200])),
                     ),
                   ),
                 )
@@ -216,7 +216,8 @@ class _HomePageDesktopState extends State<HomePageDesktop>
                           ),
                           SizedBox(
                             height: 1000,
-                          )
+                          ),
+                          Text("Home"),
                         ],
                       ),
                     ),
