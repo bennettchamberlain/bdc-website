@@ -1,1 +1,1 @@
-int MobileBreakpoint = 600;
+const int mobileBreakpoint = 760;

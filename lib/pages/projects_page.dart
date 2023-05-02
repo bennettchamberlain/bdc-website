@@ -11,8 +11,8 @@ import '../utils/utils.dart';
 
 final Uri _url = Uri.parse('https://www.buymeacoffee.com/bchamberlain');
 
-class HomePageLayout extends StatelessWidget {
-  const HomePageLayout({super.key});
+class ProjectsPageLayout extends StatelessWidget {
+  const ProjectsPageLayout({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,37 +20,37 @@ class HomePageLayout extends StatelessWidget {
       builder: (context, constraints) {
         Size size = MediaQuery.of(context).size;
         if (size.width < mobileBreakpoint) {
-          return HomePageMobile();
+          return ProjectsPageMobile();
         } else {
-          return HomePageDesktop();
+          return ProjectsPageDesktop();
         }
       },
     );
   }
 }
 
-class HomePageMobile extends StatefulWidget {
-  const HomePageMobile({super.key});
+class ProjectsPageMobile extends StatefulWidget {
+  const ProjectsPageMobile({super.key});
 
   @override
-  State<HomePageMobile> createState() => _HomePageMobileState();
+  State<ProjectsPageMobile> createState() => _ProjectsPageMobileState();
 }
 
-class _HomePageMobileState extends State<HomePageMobile> {
+class _ProjectsPageMobileState extends State<ProjectsPageMobile> {
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
   }
 }
 
-class HomePageDesktop extends StatefulWidget {
-  const HomePageDesktop({super.key});
+class ProjectsPageDesktop extends StatefulWidget {
+  const ProjectsPageDesktop({super.key});
 
   @override
-  State<HomePageDesktop> createState() => _HomePageDesktopState();
+  State<ProjectsPageDesktop> createState() => _ProjectsPageDesktopState();
 }
 
-class _HomePageDesktopState extends State<HomePageDesktop>
+class _ProjectsPageDesktopState extends State<ProjectsPageDesktop>
     with SingleTickerProviderStateMixin {
   bool selectedNavigation = false;
 

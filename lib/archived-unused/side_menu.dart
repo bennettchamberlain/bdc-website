@@ -1,5 +1,5 @@
-import 'package:bdc_website/components/side_menu_tile.dart';
-import 'package:bdc_website/models/animation_model.dart';
+import 'package:bdc_website/archived-unused/side_menu_tile.dart';
+import 'package:bdc_website/archived-unused/animation_model.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 import 'package:vrouter/vrouter.dart';
@@ -15,7 +15,7 @@ class MenuPageLayout extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         Size size = MediaQuery.of(context).size;
-        if (size.width < MobileBreakpoint) {
+        if (size.width < mobileBreakpoint) {
           return MenuMobile();
         } else {
           return MenuDesktop();

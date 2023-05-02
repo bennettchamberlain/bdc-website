@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 import 'package:vrouter/vrouter.dart';
 
-import '../models/animation_model.dart';
+import 'animation_model.dart';
 
 class SideMenuTile extends StatelessWidget {
   final RiveAsset menu;
@@ -21,20 +21,20 @@ class SideMenuTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 24.0),
+        const Padding(
+          padding: EdgeInsets.only(left: 24.0),
           child: Divider(color: Colors.white24, height: 1),
         ),
         Stack(
           children: [
             AnimatedPositioned(
               curve: Curves.fastOutSlowIn,
-              duration: Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 300),
               height: 56,
               width: isActive ? 280 : 0,
               left: 0,
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 97, 24, 110),
                 ),
               ),
@@ -52,7 +52,7 @@ class SideMenuTile extends StatelessWidget {
               ),
               title: Text(
                 menu.title,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                 ),
               ),

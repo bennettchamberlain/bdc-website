@@ -11,8 +11,8 @@ import '../utils/utils.dart';
 
 final Uri _url = Uri.parse('https://www.buymeacoffee.com/bchamberlain');
 
-class HomePageLayout extends StatelessWidget {
-  const HomePageLayout({super.key});
+class BlogPageLayout extends StatelessWidget {
+  const BlogPageLayout({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,37 +20,37 @@ class HomePageLayout extends StatelessWidget {
       builder: (context, constraints) {
         Size size = MediaQuery.of(context).size;
         if (size.width < mobileBreakpoint) {
-          return HomePageMobile();
+          return BlogPageMobile();
         } else {
-          return HomePageDesktop();
+          return BlogPageDesktop();
         }
       },
     );
   }
 }
 
-class HomePageMobile extends StatefulWidget {
-  const HomePageMobile({super.key});
+class BlogPageMobile extends StatefulWidget {
+  const BlogPageMobile({super.key});
 
   @override
-  State<HomePageMobile> createState() => _HomePageMobileState();
+  State<BlogPageMobile> createState() => _BlogPageMobileState();
 }
 
-class _HomePageMobileState extends State<HomePageMobile> {
+class _BlogPageMobileState extends State<BlogPageMobile> {
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
   }
 }
 
-class HomePageDesktop extends StatefulWidget {
-  const HomePageDesktop({super.key});
+class BlogPageDesktop extends StatefulWidget {
+  const BlogPageDesktop({super.key});
 
   @override
-  State<HomePageDesktop> createState() => _HomePageDesktopState();
+  State<BlogPageDesktop> createState() => _BlogPageDesktopState();
 }
 
-class _HomePageDesktopState extends State<HomePageDesktop>
+class _BlogPageDesktopState extends State<BlogPageDesktop>
     with SingleTickerProviderStateMixin {
   bool selectedNavigation = false;
 

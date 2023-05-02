@@ -1,4 +1,4 @@
-import 'package:bdc_website/modules/side_menu.dart';
+import 'package:bdc_website/archived-unused/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -8,46 +8,46 @@ import '../utils/utils.dart';
 
 final Uri _url = Uri.parse('https://www.buymeacoffee.com/bchamberlain');
 
-class PortfolioPageLayout extends StatelessWidget {
-  const PortfolioPageLayout({super.key});
+class AboutPageLayout extends StatelessWidget {
+  const AboutPageLayout({super.key});
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
         Size size = MediaQuery.of(context).size;
-        if (size.width < MobileBreakpoint) {
-          return PortfolioPageMobile();
+        if (size.width < mobileBreakpoint) {
+          return AboutPageMobile();
         } else {
-          return PortfolioPageDesktop();
+          return AboutPageDesktop();
         }
       },
     );
   }
 }
 
-class PortfolioPageMobile extends StatefulWidget {
-  const PortfolioPageMobile({super.key});
+class AboutPageMobile extends StatefulWidget {
+  const AboutPageMobile({super.key});
 
   @override
-  State<PortfolioPageMobile> createState() => _PortfolioPageMobileState();
+  State<AboutPageMobile> createState() => _AboutPageMobileState();
 }
 
-class _PortfolioPageMobileState extends State<PortfolioPageMobile> {
+class _AboutPageMobileState extends State<AboutPageMobile> {
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
   }
 }
 
-class PortfolioPageDesktop extends StatefulWidget {
-  const PortfolioPageDesktop({super.key});
+class AboutPageDesktop extends StatefulWidget {
+  const AboutPageDesktop({super.key});
 
   @override
-  State<PortfolioPageDesktop> createState() => _PortfolioPageDesktopState();
+  State<AboutPageDesktop> createState() => _AboutPageDesktopState();
 }
 
-class _PortfolioPageDesktopState extends State<PortfolioPageDesktop>
+class _AboutPageDesktopState extends State<AboutPageDesktop>
     with SingleTickerProviderStateMixin {
   bool selectedNavigation = false;
   bool isSideMenuClosed = true;
@@ -122,12 +122,12 @@ class _PortfolioPageDesktopState extends State<PortfolioPageDesktop>
             ),
           ),
           AnimatedPositioned(
-            duration: Duration(milliseconds: 1000),
+            duration: const Duration(milliseconds: 1000),
             curve: Curves.fastOutSlowIn,
             right: isSideMenuClosed ? -250 : 0,
             width: 250,
             height: MediaQuery.of(context).size.height,
-            child: MenuDesktop(),
+            child: const MenuDesktop(),
           ),
           Transform.translate(
             offset: Offset(animation.value * -250,
@@ -154,7 +154,7 @@ class _PortfolioPageDesktopState extends State<PortfolioPageDesktop>
                                       : 0.0,
                                   duration: const Duration(milliseconds: 1600),
                                   curve: Curves.fastOutSlowIn,
-                                  child: SingleChildScrollView(
+                                  child: const SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child: Padding(
                                       padding: EdgeInsets.only(
@@ -177,7 +177,7 @@ class _PortfolioPageDesktopState extends State<PortfolioPageDesktop>
                                 height: 90,
                                 width: 90,
                                 //padding: EdgeInsets.all(19),
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                     border: Border(
                                         top: BorderSide(
                                             width: 8, color: Colors.black),
@@ -186,7 +186,7 @@ class _PortfolioPageDesktopState extends State<PortfolioPageDesktop>
                                         bottom: BorderSide(
                                             width: 8, color: Colors.black))),
                                 child: TextButton(
-                                  style: ButtonStyle(
+                                  style: const ButtonStyle(
                                     splashFactory: InkRipple.splashFactory,
                                   ),
                                   onPressed: () {
@@ -205,7 +205,7 @@ class _PortfolioPageDesktopState extends State<PortfolioPageDesktop>
                                           size: 55,
                                           color: Colors.black,
                                         )
-                                      : Icon(
+                                      : const Icon(
                                           Icons.arrow_forward_ios,
                                           size: 55,
                                           color: Colors.black,
@@ -214,10 +214,10 @@ class _PortfolioPageDesktopState extends State<PortfolioPageDesktop>
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 1000,
                           ),
-                          Text("Portfolio"),
+                          //Text("About"),
                         ],
                       ),
                     ),
