@@ -1,4 +1,5 @@
 import 'package:bdc_website/components/button_box.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:vrouter/vrouter.dart';
 
@@ -20,6 +21,8 @@ class MyFooter extends StatelessWidget {
               fontSize: 20,
               alignCorL: true,
               onPressed: () {
+                FirebaseAnalytics.instance
+                    .logEvent(name: 'home_page_navigation');
                 context.vRouter.to("/");
               }),
         ),
@@ -36,6 +39,8 @@ class MyFooter extends StatelessWidget {
               fontSize: 20,
               alignCorL: true,
               onPressed: () {
+                FirebaseAnalytics.instance
+                    .logEvent(name: 'about_page_navigation');
                 context.vRouter.to("/about");
               }),
         ),
@@ -52,6 +57,8 @@ class MyFooter extends StatelessWidget {
               fontSize: 20,
               alignCorL: true,
               onPressed: () {
+                FirebaseAnalytics.instance
+                    .logEvent(name: 'projects_page_navigation');
                 context.vRouter.to("/projects");
               }),
         ),
@@ -68,6 +75,8 @@ class MyFooter extends StatelessWidget {
               fontSize: 20,
               alignCorL: true,
               onPressed: () {
+                FirebaseAnalytics.instance
+                    .logEvent(name: 'blog_page_navigation');
                 context.vRouter.to("/blog");
               }),
         ),
@@ -84,6 +93,8 @@ class MyFooter extends StatelessWidget {
               fontSize: 20,
               alignCorL: true,
               onPressed: () {
+                FirebaseAnalytics.instance
+                    .logEvent(name: 'contact_page_navigation');
                 context.vRouter.to("/contact");
               }),
         ),

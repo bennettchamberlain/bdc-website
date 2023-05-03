@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:bdc_website/components/button_box.dart';
 import 'package:bdc_website/components/my_footer.dart';
 import 'package:bdc_website/components/my_marquee.dart';
@@ -87,11 +88,71 @@ class _HomePageDesktopState extends State<HomePageDesktop>
                     SizedBox(
                       height: 110,
                     ),
-
                     //PUT EVERYTIHING HERE
                     Container(
                       height: 500,
                       decoration: BoxDecoration(border: Border.all(width: 8)),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border(
+                                    right: BorderSide(
+                                        width: 8, color: Colors.black))),
+                            child: Image.asset("assets/images/headshot.jpg"),
+                          ),
+                          Expanded(
+                            child: AnimatedContainer(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border(
+                                      bottom: BorderSide(
+                                          width: 8, color: Colors.black))),
+                              height: selectedNavigation ? 500 : 0,
+                              duration: Duration(milliseconds: 800),
+                              child: Container(
+                                  padding: EdgeInsets.all(15),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      const Text(
+                                        'Apps for',
+                                        style: TextStyle(fontSize: 25),
+                                      ),
+                                      const SizedBox(
+                                          width: 15.0, height: 100.0),
+                                      DefaultTextStyle(
+                                        style: const TextStyle(
+                                          fontSize: 25.0,
+                                          fontFamily: 'Helvetica',
+                                        ),
+                                        child: AnimatedTextKit(
+                                          animatedTexts: [
+                                            RotateAnimatedText('iOS',
+                                                textStyle: TextStyle(
+                                                    fontFamily:
+                                                        "Helvetica-Bold")),
+                                            RotateAnimatedText('Android',
+                                                textStyle: TextStyle(
+                                                    fontFamily:
+                                                        "Helvetica-Bold")),
+                                            RotateAnimatedText('Web',
+                                                textStyle: TextStyle(
+                                                    fontFamily:
+                                                        "Helvetica-Bold")),
+                                          ],
+                                          onTap: () {
+                                            print("Tap Event");
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(height: 50),
                     MyFooter(),

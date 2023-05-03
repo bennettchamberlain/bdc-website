@@ -1,14 +1,20 @@
 import 'package:bdc_website/archived-unused/side_menu.dart';
 import 'package:bdc_website/pages/wrong_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:vrouter/vrouter.dart';
+import 'firebase_options.dart';
 import 'pages/about_page.dart';
 import 'pages/blog_page.dart';
 import 'pages/contact_page.dart';
 import 'pages/home_page.dart';
 import 'pages/projects_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 

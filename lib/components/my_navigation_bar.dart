@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:vrouter/vrouter.dart';
 import '../utils/providers.dart';
@@ -126,6 +127,8 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
                           fontSize: 20,
                           alignCorL: false,
                           onPressed: () {
+                            FirebaseAnalytics.instance
+                                .logEvent(name: 'home_page_navigation');
                             context.vRouter.to("/");
                           },
                         ),
@@ -137,6 +140,8 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
                           fontSize: 20,
                           alignCorL: false,
                           onPressed: () {
+                            FirebaseAnalytics.instance
+                                .logEvent(name: 'about_page_navigation');
                             context.vRouter.to("/about");
                           },
                         ),
@@ -148,6 +153,8 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
                           fontSize: 20,
                           alignCorL: false,
                           onPressed: () {
+                            FirebaseAnalytics.instance
+                                .logEvent(name: 'projects_page_navigation');
                             context.vRouter.to("/projects");
                           },
                         ),
@@ -159,6 +166,8 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
                           fontSize: 20,
                           alignCorL: false,
                           onPressed: () {
+                            FirebaseAnalytics.instance
+                                .logEvent(name: 'blog_page_navigation');
                             context.vRouter.to("/blog");
                           },
                         ),
@@ -170,6 +179,8 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
                           fontSize: 20,
                           alignCorL: false,
                           onPressed: () {
+                            FirebaseAnalytics.instance
+                                .logEvent(name: 'contact_page_navigation');
                             context.vRouter.to("/contact");
                           },
                         ),
