@@ -37,10 +37,104 @@ class HomePageMobile extends StatefulWidget {
   State<HomePageMobile> createState() => _HomePageMobileState();
 }
 
-class _HomePageMobileState extends State<HomePageMobile> {
+class _HomePageMobileState extends State<HomePageMobile>
+    with SingleTickerProviderStateMixin {
+  bool selectedNavigation = false;
+
+  @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 0)).then((value) => setState(() {
+          selectedNavigation = true;
+        }));
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    Size size = MediaQuery.of(context).size;
+    return Scaffold(
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
+      extendBody: true,
+      body: Container(
+        color: Colors.white,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Stack(
+                  children: [
+                    Column(
+                      children: [
+                        SizedBox(height: 65),
+                        //PUT EVERYTIHING HERE
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 8, color: Colors.black)),
+                              child: Image.asset("assets/images/headshot.jpg"),
+                            ),
+                            SizedBox(height: 15),
+                            AnimatedContainer(
+                              curve: Curves.fastOutSlowIn,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 8, color: Colors.black)),
+                              duration: Duration(milliseconds: 1600),
+                              height: selectedNavigation ? 150 : 0,
+                              width: size.width,
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Container(
+                                    width: 500,
+                                    child: AnimatedTextKit(
+                                      totalRepeatCount: 1,
+                                      animatedTexts: [
+                                        TyperAnimatedText(
+                                            "Software Engineer\nProject Manager\nLifelong Student",
+                                            speed: Duration(
+                                              milliseconds: 100,
+                                            ),
+                                            textStyle: TextStyle(
+                                                fontFamily: "Helvetica-Bold",
+                                                fontSize: 20))
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+
+                        SizedBox(height: 25),
+                        MyFooter(mobile: true),
+                      ],
+                    ),
+                    const MyNavigationBar(mobile: true),
+                  ],
+                ),
+              ),
+              MyMarquee(
+                  mobile: true,
+                  text:
+                      " Pixel perfect designs. Cross-platform applications. Full-stack websites. "),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -79,88 +173,75 @@ class _HomePageDesktopState extends State<HomePageDesktop>
       body: Container(
         color: Colors.white,
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Stack(
-              children: [
-                Column(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Stack(
                   children: [
-                    SizedBox(
-                      height: 110,
-                    ),
-                    //PUT EVERYTIHING HERE
-                    Container(
-                      height: 500,
-                      decoration: BoxDecoration(border: Border.all(width: 8)),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    right: BorderSide(
-                                        width: 8, color: Colors.black))),
-                            child: Image.asset("assets/images/headshot.jpg"),
-                          ),
-                          Expanded(
-                            child: AnimatedContainer(
+                    Column(
+                      children: [
+                        SizedBox(
+                          height: 110,
+                        ),
+                        //PUT EVERYTIHING HERE
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 450,
                               decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border(
-                                      bottom: BorderSide(
-                                          width: 8, color: Colors.black))),
-                              height: selectedNavigation ? 500 : 0,
-                              duration: Duration(milliseconds: 800),
-                              child: Container(
-                                  padding: EdgeInsets.all(15),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      const Text(
-                                        'Apps for',
-                                        style: TextStyle(fontSize: 25),
-                                      ),
-                                      const SizedBox(
-                                          width: 15.0, height: 100.0),
-                                      DefaultTextStyle(
-                                        style: const TextStyle(
-                                          fontSize: 25.0,
-                                          fontFamily: 'Helvetica',
-                                        ),
-                                        child: AnimatedTextKit(
-                                          animatedTexts: [
-                                            RotateAnimatedText('iOS',
-                                                textStyle: TextStyle(
-                                                    fontFamily:
-                                                        "Helvetica-Bold")),
-                                            RotateAnimatedText('Android',
-                                                textStyle: TextStyle(
-                                                    fontFamily:
-                                                        "Helvetica-Bold")),
-                                            RotateAnimatedText('Web',
-                                                textStyle: TextStyle(
-                                                    fontFamily:
-                                                        "Helvetica-Bold")),
-                                          ],
-                                          onTap: () {
-                                            print("Tap Event");
-                                          },
-                                        ),
-                                      ),
-                                    ],
-                                  )),
+                                  border: Border.all(
+                                      width: 8, color: Colors.black)),
+                              child: Image.asset("assets/images/headshot.jpg"),
                             ),
-                          ),
-                        ],
-                      ),
+                            SizedBox(width: 15),
+                            AnimatedContainer(
+                              curve: Curves.fastOutSlowIn,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 8, color: Colors.black)),
+                              duration: Duration(milliseconds: 1600),
+                              height: selectedNavigation ? 505 : 0,
+                              width: size.width - 495,
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Container(
+                                    width: 500,
+                                    child: AnimatedTextKit(
+                                      totalRepeatCount: 1,
+                                      animatedTexts: [
+                                        TyperAnimatedText(
+                                            "Software Engineer\nProject Manager\nLifelong Student",
+                                            speed: Duration(
+                                              milliseconds: 100,
+                                            ),
+                                            textStyle: TextStyle(
+                                                fontFamily: "Helvetica-Bold",
+                                                fontSize: 50))
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+
+                        SizedBox(height: 25),
+                        MyFooter(mobile: false),
+                      ],
                     ),
-                    SizedBox(height: 50),
-                    MyFooter(),
+                    const MyNavigationBar(mobile: false),
                   ],
                 ),
-                const MyNavigationBar(),
-              ],
-            ),
+              ),
+              MyMarquee(
+                  mobile: false,
+                  text:
+                      " Pixel perfect designs. Cross-platform applications. Full-stack websites. "),
+            ],
           ),
         ),
       ),

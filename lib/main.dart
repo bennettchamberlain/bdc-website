@@ -1,4 +1,8 @@
 import 'package:bdc_website/archived-unused/side_menu.dart';
+import 'package:bdc_website/enums/blog_posts_enums.dart';
+import 'package:bdc_website/enums/projects_enums.dart';
+import 'package:bdc_website/pages/individual_blog_page.dart';
+import 'package:bdc_website/pages/individual_project_page.dart';
 import 'package:bdc_website/pages/wrong_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +56,29 @@ class MyApp extends StatelessWidget {
           path: '/404',
           widget: const WrongPageLayout(),
         ),
+
+        //-----------------------ALL of the blog posts------------------
+
+        VWidget(
+          path: '/blog/post-1',
+          widget: const IndividualBlogPage(post: BlogPosts.BlogPost1),
+        ),
+        VWidget(
+          path: '/blog/post-2',
+          widget: const IndividualBlogPage(post: BlogPosts.BlogPost1),
+        ),
+
+        //-----------------------ALL of the project posts------------------
+
+        VWidget(
+          path: '/projects/project-1',
+          widget: const IndividualProjectPage(post: ProjectPosts.ProjectPost1),
+        ),
+        VWidget(
+          path: '/projects/project-2',
+          widget: const IndividualProjectPage(post: ProjectPosts.ProjectPost2),
+        ),
+
         VRouteRedirector(path: '*', redirectTo: '/404')
       ],
       title: 'BDC - 999',

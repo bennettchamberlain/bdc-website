@@ -9,17 +9,19 @@ class ButtonBox extends StatefulWidget {
   final double fontSize;
   final bool alignCorL;
   final Function onPressed;
+  final bool mobile;
 
-  const ButtonBox({
-    Key? key,
-    this.height,
-    this.width,
-    required this.border,
-    required this.text,
-    required this.fontSize,
-    required this.alignCorL,
-    required this.onPressed,
-  }) : super(key: key);
+  const ButtonBox(
+      {Key? key,
+      this.height,
+      this.width,
+      required this.border,
+      required this.text,
+      required this.fontSize,
+      required this.alignCorL,
+      required this.onPressed,
+      required this.mobile})
+      : super(key: key);
 
   @override
   _ButtonBoxState createState() => _ButtonBoxState();
@@ -31,6 +33,11 @@ class _ButtonBoxState extends State<ButtonBox> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTapDown: (details) {
+        setState(() {
+          _isHovered = true;
+        });
+      },
       onTap: widget.onPressed as void Function()?,
       child: MouseRegion(
         onEnter: (_) => setState(() => _isHovered = true),
@@ -54,8 +61,9 @@ class _ButtonBoxState extends State<ButtonBox> {
               child: widget.alignCorL
                   ? Center(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 8.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: widget.mobile ? 4 : 16.0,
+                            vertical: 8.0),
                         child: Text(
                           widget.text,
                           style: TextStyle(

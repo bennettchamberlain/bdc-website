@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:bdc_website/components/button_box.dart';
 import 'package:bdc_website/components/my_footer.dart';
 import 'package:bdc_website/components/my_marquee.dart';
@@ -36,10 +37,75 @@ class WrongPageMobile extends StatefulWidget {
   State<WrongPageMobile> createState() => _WrongPageMobileState();
 }
 
-class _WrongPageMobileState extends State<WrongPageMobile> {
+class _WrongPageMobileState extends State<WrongPageMobile>
+    with SingleTickerProviderStateMixin {
+  bool selectedNavigation = false;
+
+  @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 0)).then((value) => setState(() {
+          selectedNavigation = true;
+        }));
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    Size size = MediaQuery.of(context).size;
+    return Scaffold(
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
+      extendBody: true,
+      body: Container(
+        color: Colors.white,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Stack(
+                  children: [
+                    Column(
+                      children: [
+                        SizedBox(
+                          height: 100,
+                        ),
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 1200),
+                          child: const SelectableText(
+                            "This page doesnt exist...Awkward",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 30,
+                            ),
+                          ),
+                        ),
+                        ConstrainedBox(
+                          constraints: BoxConstraints(maxHeight: 500),
+                          child: const RiveAnimation.asset(
+                              '/animations/404.riv',
+                              artboard: '404-error.svg',
+                              fit: BoxFit.contain),
+                        ),
+                        MyFooter(mobile: true),
+                      ],
+                    ),
+                    const MyNavigationBar(mobile: true),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -78,40 +144,45 @@ class _WrongPageDesktopState extends State<WrongPageDesktop>
       body: Container(
         color: Colors.white,
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Stack(
-              children: [
-                Column(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Stack(
                   children: [
-                    SizedBox(
-                      height: 150,
-                    ),
-                    ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 1200),
-                      child: const SelectableText(
-                        "This page doesnt exist...Awkward",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 30,
+                    Column(
+                      children: [
+                        SizedBox(
+                          height: 150,
                         ),
-                      ),
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 1200),
+                          child: const SelectableText(
+                            "This page doesnt exist...Awkward",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 30,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height,
+                          child: const RiveAnimation.asset(
+                              '/animations/404.riv',
+                              artboard: '404-error.svg',
+                              fit: BoxFit.contain),
+                        ),
+                        SizedBox(height: 50),
+                        SizedBox(height: 50),
+                        MyFooter(mobile: false),
+                      ],
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height,
-                      child: const RiveAnimation.asset('/animations/404.riv',
-                          artboard: '404-error.svg', fit: BoxFit.contain),
-                    ),
-                    SizedBox(height: 50),
-                    MyMarquee(),
-                    SizedBox(height: 50),
-                    MyFooter(),
+                    const MyNavigationBar(mobile: false),
                   ],
                 ),
-                const MyNavigationBar(),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

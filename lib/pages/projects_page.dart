@@ -1,3 +1,4 @@
+import 'package:bdc_website/components/blog_card.dart';
 import 'package:bdc_website/components/button_box.dart';
 import 'package:bdc_website/components/my_footer.dart';
 import 'package:bdc_website/components/my_marquee.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/rendering.dart';
 import 'package:marquee/marquee.dart';
 import 'package:rive/rive.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../enums/projects_enums.dart';
 import '../utils/utils.dart';
 
 final Uri _url = Uri.parse('https://www.buymeacoffee.com/bchamberlain');
@@ -90,14 +92,29 @@ class _ProjectsPageDesktopState extends State<ProjectsPageDesktop>
 
                     //PUT EVERYTIHING HERE
                     Container(
-                      height: 500,
+                      height: 1500,
+                      width: size.width,
                       decoration: BoxDecoration(border: Border.all(width: 8)),
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Container(
+                          child: Column(children: [
+                            ...ProjectPosts.values.map(
+                              (e) => BlogCard(
+                                title: e.title,
+                                blogContent: e.blogContent,
+                                imagePath: e.imagePath,
+                                path: e.path,
+                              ),
+                            )
+                          ]),
+                        ),
+                      ),
                     ),
-                    SizedBox(height: 50),
-                    MyFooter(),
+                    //MyFooter(),
                   ],
                 ),
-                const MyNavigationBar(),
+                const MyNavigationBar(mobile: false),
               ],
             ),
           ),

@@ -5,7 +5,8 @@ import '../utils/providers.dart';
 import 'button_box.dart';
 
 class MyNavigationBar extends StatefulWidget {
-  const MyNavigationBar({super.key});
+  final bool mobile;
+  const MyNavigationBar({required this.mobile, super.key});
 
   @override
   State<MyNavigationBar> createState() => _MyNavigationBarState();
@@ -34,12 +35,16 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
               decoration: BoxDecoration(
                   border: Border.all(width: 8, color: Colors.black)),
               child: AnimatedContainer(
-                width: selectedNavigation
-                    ? MediaQuery.of(context).size.width - 136
-                    : 0,
+                width: widget.mobile
+                    ? (selectedNavigation
+                        ? MediaQuery.of(context).size.width - 99
+                        : 0)
+                    : (selectedNavigation
+                        ? MediaQuery.of(context).size.width - 136
+                        : 0),
                 duration: const Duration(milliseconds: 1600),
                 curve: Curves.fastOutSlowIn,
-                child: const SingleChildScrollView(
+                child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Padding(
                     padding: EdgeInsets.only(
@@ -49,15 +54,15 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
                       style: TextStyle(
                           fontFamily: "Primetime",
                           fontWeight: FontWeight.bold,
-                          fontSize: 45),
+                          fontSize: widget.mobile ? 18 : 45),
                     ),
                   ),
                 ),
               ),
             ),
             Container(
-              height: 90,
-              width: 90,
+              height: widget.mobile ? 53 : 90,
+              width: widget.mobile ? 53 : 90,
               //padding: EdgeInsets.all(19),
               decoration: const BoxDecoration(
                   border: Border(
@@ -75,14 +80,14 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
                           }));
                 },
                 child: isSideMenuClosed.value
-                    ? const Icon(
+                    ? Icon(
                         Icons.menu,
-                        size: 55,
+                        size: widget.mobile ? 25 : 55,
                         color: Colors.black,
                       )
-                    : const Icon(
+                    : Icon(
                         Icons.arrow_downward,
-                        size: 55,
+                        size: widget.mobile ? 25 : 55,
                         color: Colors.black,
                       ),
               ),
@@ -114,78 +119,94 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
               child: Container(
                 color: Colors.white,
                 child: Padding(
-                    padding: EdgeInsets.only(
-                        top: 5.0, bottom: 8, left: 10, right: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ButtonBox(
-                          width: 150,
-                          height: 50,
-                          border: false,
-                          text: "Home",
-                          fontSize: 20,
-                          alignCorL: false,
-                          onPressed: () {
+                  padding:
+                      EdgeInsets.only(top: 5.0, bottom: 8, left: 10, right: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ButtonBox(
+                        mobile: widget.mobile,
+                        width: widget.mobile ? 85 : 150,
+                        height: 50,
+                        border: false,
+                        text: "Home",
+                        fontSize: 20,
+                        alignCorL: false,
+                        onPressed: () {
+                          if (context.vRouter.path != "/") {
                             FirebaseAnalytics.instance
                                 .logEvent(name: 'home_page_navigation');
-                            context.vRouter.to("/");
-                          },
-                        ),
-                        ButtonBox(
-                          width: 150,
-                          height: 50,
-                          border: false,
-                          text: "About",
-                          fontSize: 20,
-                          alignCorL: false,
-                          onPressed: () {
+                          }
+                          context.vRouter.to("/");
+                        },
+                      ),
+                      ButtonBox(
+                        mobile: widget.mobile,
+                        width: widget.mobile ? 85 : 150,
+                        height: 50,
+                        border: false,
+                        text: "About",
+                        fontSize: 20,
+                        alignCorL: false,
+                        onPressed: () {
+                          if (context.vRouter.path != "/about") {
                             FirebaseAnalytics.instance
                                 .logEvent(name: 'about_page_navigation');
-                            context.vRouter.to("/about");
-                          },
-                        ),
-                        ButtonBox(
-                          width: 150,
-                          height: 50,
-                          border: false,
-                          text: "Projects",
-                          fontSize: 20,
-                          alignCorL: false,
-                          onPressed: () {
+                          }
+                          context.vRouter.to("/about");
+                        },
+                      ),
+                      ButtonBox(
+                        mobile: widget.mobile,
+                        width: 150,
+                        height: 50,
+                        border: false,
+                        text: "Projects",
+                        fontSize: 20,
+                        alignCorL: false,
+                        onPressed: () {
+                          if (context.vRouter.path != "/projects") {
                             FirebaseAnalytics.instance
                                 .logEvent(name: 'projects_page_navigation');
-                            context.vRouter.to("/projects");
-                          },
-                        ),
-                        ButtonBox(
-                          width: 150,
-                          height: 50,
-                          border: false,
-                          text: "Blog",
-                          fontSize: 20,
-                          alignCorL: false,
-                          onPressed: () {
+                          }
+                          context.vRouter.to("/projects");
+                        },
+                      ),
+                      ButtonBox(
+                        mobile: widget.mobile,
+                        width: 150,
+                        height: 50,
+                        border: false,
+                        text: "Blog",
+                        fontSize: 20,
+                        alignCorL: false,
+                        onPressed: () {
+                          if (context.vRouter.path != "/blog") {
                             FirebaseAnalytics.instance
                                 .logEvent(name: 'blog_page_navigation');
-                            context.vRouter.to("/blog");
-                          },
-                        ),
-                        ButtonBox(
-                          width: 150,
-                          height: 50,
-                          border: false,
-                          text: "Contact",
-                          fontSize: 20,
-                          alignCorL: false,
-                          onPressed: () {
+                          }
+                          context.vRouter.to("/blog");
+                        },
+                      ),
+                      ButtonBox(
+                        mobile: widget.mobile,
+                        width: 150,
+                        height: 50,
+                        border: false,
+                        text: "Contact",
+                        fontSize: 20,
+                        alignCorL: false,
+                        onPressed: () {
+                          if (context.vRouter.path != "/contact") {
                             FirebaseAnalytics.instance
                                 .logEvent(name: 'contact_page_navigation');
-                            context.vRouter.to("/contact");
-                          },
-                        ),
-                      ],
-                    )),
+                          }
+                          context.vRouter.to("/contact");
+                        },
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),

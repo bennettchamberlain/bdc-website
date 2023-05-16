@@ -1,3 +1,4 @@
+import 'package:bdc_website/components/blog_card.dart';
 import 'package:bdc_website/components/button_box.dart';
 import 'package:bdc_website/components/my_footer.dart';
 import 'package:bdc_website/components/my_marquee.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/rendering.dart';
 import 'package:marquee/marquee.dart';
 import 'package:rive/rive.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../enums/blog_posts_enums.dart';
 import '../utils/utils.dart';
 
 final Uri _url = Uri.parse('https://www.buymeacoffee.com/bchamberlain');
@@ -79,7 +81,7 @@ class _BlogPageDesktopState extends State<BlogPageDesktop>
         color: Colors.white,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: EdgeInsets.all(15.0),
             child: Stack(
               children: [
                 Column(
@@ -90,14 +92,30 @@ class _BlogPageDesktopState extends State<BlogPageDesktop>
 
                     //PUT EVERYTIHING HERE
                     Container(
-                      height: 500,
+                      height: 1500,
                       decoration: BoxDecoration(border: Border.all(width: 8)),
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Container(
+                          child: Column(children: [
+                            ...BlogPosts.values.map(
+                              (e) => BlogCard(
+                                title: e.title,
+                                blogContent: e.blogContent,
+                                imagePath: e.imagePath,
+                                buttonText: "Learn more",
+                                path: e.path,
+                              ),
+                            )
+                          ]),
+                        ),
+                      ),
                     ),
                     SizedBox(height: 50),
-                    MyFooter(),
+                    //MyFooter(),
                   ],
                 ),
-                const MyNavigationBar(),
+                const MyNavigationBar(mobile: false),
               ],
             ),
           ),

@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:vrouter/vrouter.dart';
 
 class MyFooter extends StatelessWidget {
-  const MyFooter({super.key});
+  bool mobile;
+  MyFooter({required this.mobile, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,87 +15,110 @@ class MyFooter extends StatelessWidget {
         Flexible(
           flex: 2,
           child: ButtonBox(
+              mobile: mobile,
               width: 150,
               height: 50,
               border: false,
               text: "Home",
-              fontSize: 20,
+              fontSize: mobile ? 14 : 20,
               alignCorL: true,
               onPressed: () {
-                FirebaseAnalytics.instance
-                    .logEvent(name: 'home_page_navigation');
+                if (context.vRouter.path != "/") {
+                  FirebaseAnalytics.instance
+                      .logEvent(name: 'home_page_navigation');
+                }
                 context.vRouter.to("/");
               }),
         ),
-        SizedBox(
-          width: 15,
-        ),
+        mobile
+            ? Container()
+            : SizedBox(
+                width: 15,
+              ),
         Flexible(
           flex: 2,
           child: ButtonBox(
+              mobile: mobile,
               width: 150,
               height: 50,
               border: false,
               text: "About",
-              fontSize: 20,
+              fontSize: mobile ? 14 : 20,
               alignCorL: true,
               onPressed: () {
-                FirebaseAnalytics.instance
-                    .logEvent(name: 'about_page_navigation');
+                if (context.vRouter.path != "/about") {
+                  FirebaseAnalytics.instance
+                      .logEvent(name: 'about_page_navigation');
+                }
                 context.vRouter.to("/about");
               }),
         ),
-        SizedBox(
-          width: 15,
-        ),
+        mobile
+            ? Container()
+            : SizedBox(
+                width: 15,
+              ),
         Flexible(
           flex: 2,
           child: ButtonBox(
+              mobile: mobile,
               width: 150,
               height: 50,
               border: false,
               text: "Projects",
-              fontSize: 20,
+              fontSize: mobile ? 14 : 20,
               alignCorL: true,
               onPressed: () {
-                FirebaseAnalytics.instance
-                    .logEvent(name: 'projects_page_navigation');
+                if (context.vRouter.path != "/projects") {
+                  FirebaseAnalytics.instance
+                      .logEvent(name: 'projects_page_navigation');
+                }
                 context.vRouter.to("/projects");
               }),
         ),
-        SizedBox(
-          width: 15,
-        ),
+        mobile
+            ? Container()
+            : SizedBox(
+                width: 15,
+              ),
         Flexible(
           flex: 2,
           child: ButtonBox(
+              mobile: mobile,
               width: 150,
               height: 50,
               border: false,
               text: "Blog",
-              fontSize: 20,
+              fontSize: mobile ? 14 : 20,
               alignCorL: true,
               onPressed: () {
-                FirebaseAnalytics.instance
-                    .logEvent(name: 'blog_page_navigation');
+                if (context.vRouter.path != "/blog") {
+                  FirebaseAnalytics.instance
+                      .logEvent(name: 'blog_page_navigation');
+                }
                 context.vRouter.to("/blog");
               }),
         ),
-        SizedBox(
-          width: 15,
-        ),
+        mobile
+            ? Container()
+            : SizedBox(
+                width: 15,
+              ),
         Flexible(
           flex: 2,
           child: ButtonBox(
+              mobile: mobile,
               width: 150,
               height: 50,
               border: false,
               text: "Contact",
-              fontSize: 20,
+              fontSize: mobile ? 14 : 20,
               alignCorL: true,
               onPressed: () {
-                FirebaseAnalytics.instance
-                    .logEvent(name: 'contact_page_navigation');
+                if (context.vRouter.path != "/contact") {
+                  FirebaseAnalytics.instance
+                      .logEvent(name: 'contact_page_navigation');
+                }
                 context.vRouter.to("/contact");
               }),
         ),
